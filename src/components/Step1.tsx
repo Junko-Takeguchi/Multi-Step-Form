@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from "./Input.tsx";
+import Button from "./Button.tsx";
 
 interface propTypes {
     setName:React.Dispatch<React.SetStateAction<string>>,
@@ -24,13 +25,7 @@ const Step1:React.FC<propTypes> = ({ onClick, name, email, setEmail, setName, se
                 <Input type={"email"} setter={setEmail} value={email} label={"Email"} placeholder={"xyz@mail.com"}/>
                 <Input type={"tel"} setter={setPhoneNo} value={phoneNo} label={"Phone"} placeholder={"+91XXXXXXXXXX"}/>
             </div>
-            <div className="mt-auto flex flex-row-reverse">
-                <button
-                    onClick={onClick}
-                    className="px-4 py-2 rounded-md border right-0 mt-4 bg-purpleishBlue text-white hover:bg-lightGray hover:text-black transition">
-                    Next
-                </button>
-            </div>
+            <Button onClick={onClick}/>
         </div>
     );
 };
