@@ -65,7 +65,13 @@ const Step3: React.FC<propType> = ({onNext}) => {
                 cardNo,
                 expiry,
                 cvv,
-            })
+            });
+            onNext({
+                nameOnCard,
+                cardNo,
+                expiry,
+                cvv,
+            });
         } else {
             console.log('Payment details are not valid');
         }

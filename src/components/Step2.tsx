@@ -10,9 +10,9 @@ type address = {
     addressType:string
 };
 interface Interface {
-    onNext?: (payload:address) => void
+    onNext: (payload:address) => void
 }
-const Step2: React.FC<Interface> = ({}) => {
+const Step2: React.FC<Interface> = ({onNext}) => {
 
     const [address, setAddress] = useState("");
     const [pincode, setPincode] = useState("");
@@ -122,13 +122,10 @@ const Step2: React.FC<Interface> = ({}) => {
                 </div>
             </div>
             <Button onClick={() => {
-                console.log({
+                onNext({
                     address,
-                    pincode,
-                    city,
-                    state,
-                    addressType
-                })
+                    city,state,pincode,addressType,
+                });
             }}/>
         </div>
     );

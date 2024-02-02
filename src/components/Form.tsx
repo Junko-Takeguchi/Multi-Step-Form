@@ -1,39 +1,39 @@
-import {useEffect, useMemo, useState} from "react";
+import { useMemo, useState} from "react";
 import StepIndicator from "./StepIndicator.tsx";
 import Step1 from "./Step1.tsx";
 import Step2 from "./Step2.tsx";
 import Step3 from "./Step3.tsx";
 import Step4 from "./Step4.tsx";
 
-type User = {
-    FullName: string;
-    email: string;
-    phoneNo: string;
-    address?: string;
-    pincode?: string;
-    city?: string;
-    state?: string;
-    addressType?: string;
-    nameOnCard?: string;
-    cardNo?: string;
-    expiry?: string;
-    cvv?: string;
-};
+// type User = {
+//     FullName: string;
+//     email: string;
+//     phoneNo: string;
+//     address?: string;
+//     pincode?: string;
+//     city?: string;
+//     state?: string;
+//     addressType?: string;
+//     nameOnCard?: string;
+//     cardNo?: string;
+//     expiry?: string;
+//     cvv?: string;
+// };
 
 const Form = () => {
     const [step, setStep] = useState([true, false, false, false]);
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
-    const [user, setUser] = useState<User>({
-        FullName: "",
-        email: "",
-        phoneNo: "",
-    });
+    // const [user, setUser] = useState<User>({
+    //     FullName: "",
+    //     email: "",
+    //     phoneNo: "",
+    // });
 
-    useEffect(() => {
-        console.log(user);
-    }, [user])
+    // useEffect(() => {
+    //     console.log(user);
+    // }, [user])
     const validateEmail = (email: string) => {
         // Regular expression for email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -63,14 +63,13 @@ const Form = () => {
         // Update the step state
         setStep(prevStep => prevStep.map((_, index) => index === nextIndex));
 
-
         // Update user state
-        setUser((prevUser) => ({
-            ...prevUser,
-            FullName: fullName,
-            phoneNo: phoneNo,
-            email: email,
-        }));
+        // setUser((prevUser) => ({
+        //     ...prevUser,
+        //     FullName: fullName,
+        //     phoneNo: phoneNo,
+        //     email: email,
+        // }));
     };
 
     const MainContent = useMemo(() => {
@@ -90,27 +89,36 @@ const Form = () => {
             return (
                 <Step2
                     onNext={(payload) => {
+                        const nextIndex = step.indexOf(true) + 1;
+                        // Update the step state
+                        setStep(prevStep => prevStep.map((_, index) => index === nextIndex));
+                        console.log(payload)
                         // Update user state with address details
-                        setUser((prevUser) => ({
-                            ...prevUser,
-                            address: payload.address,
-                            pincode: payload.pincode,
-                            city: payload.city,
-                            state: payload.state,
-                            addressType: payload.addressType,
-                        }));
+                        // setUser((prevUser) => ({
+                        //     ...prevUser,
+                        //     address: payload.address,
+                        //     pincode: payload.pincode,
+                        //     city: payload.city,
+                        //     state: payload.state,
+                        //     addressType: payload.addressType,
+                        // }));
                     }}
                 />
             );
         } else if (step[2]) {
             return <Step3 onNext={(payload) => {
-                setUser((prevUser) => ({
-                    ...prevUser,
-                    nameOnCard: payload.nameOnCard,
-                    cardNo: payload.cardNo,
-                    expiry: payload.expiry,
-                    cvv: payload.cvv,
-                }));
+                // setUser((prevUser) => ({
+                //     ...prevUser,
+                //     nameOnCard: payload.nameOnCard,
+                //     cardNo: payload.cardNo,
+                //     expiry: payload.expiry,
+                //     cvv: payload.cvv,
+                // }));
+                console.log(payload);
+                const nextIndex = step.indexOf(true) + 1;
+
+                // Update the step state
+                setStep(prevStep => prevStep.map((_, index) => index === nextIndex));
             }}/>;
         } else {
             return <Step4 />;
